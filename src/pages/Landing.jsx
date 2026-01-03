@@ -45,7 +45,7 @@ function Landing() {
                             Create Account
                         </button>
                         <p className="helper-text">
-                            Already have an account? <a href="#" onClick={handleLogin}>Sign in</a>
+                            Already have an account? <a onClick={handleLogin}>Sign in</a>
                         </p>
                     </div>
                 </div>
