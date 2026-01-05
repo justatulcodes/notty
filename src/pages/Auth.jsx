@@ -1,7 +1,8 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { setJWTToken } from "../redux/slices/auth"
+import { setJWTToken } from "../redux/slices/auth";
+import "./Auth.css";
 
 
 function Auth() {
@@ -10,7 +11,7 @@ function Auth() {
 
   const dispatch = useAppDispatch()
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   // Form input states
   const [name, setName] = useState("");
@@ -37,6 +38,7 @@ function Auth() {
     e.preventDefault();
 
     try {
+      setIsLoading(true)
       const response = await fetch("http://localhost:5002/user/login", {
         method: "POST",
         headers: {
@@ -50,21 +52,24 @@ function Auth() {
       }
 
       const result = await response.json();
-
+      
       if (response.status === 200) {
         dispatch(setJWTToken(result.token))
         navigateToNotesPage();
+        setIsLoading(false)
       } else {
         console.log(response);
+        setIsLoading(false)
       }
     } catch (error) {
+      setIsLoading(false)
       console.log(`Error during api : ${error}`);
     }
   };
 
   const signup = async (e) => {
     e.preventDefault();
-
+    setIsLoading(true)
     try {
       const response = await fetch("http://localhost:5002/user/signup", {
         method: "POST",
@@ -81,10 +86,13 @@ function Auth() {
       const result = await response.json();
       if (response.status === 201) {
         toggleMode();
+        setIsLoading(false)
       } else {
+        setIsLoading(false)
         console.log(response);
       }
     } catch (error) {
+      setIsLoading(false)
       console.log(`Error during api : ${error}`);
     }
   };
