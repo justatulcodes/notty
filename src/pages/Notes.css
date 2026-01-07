@@ -54,6 +54,40 @@
     font-weight: 600;
 }
 
+.delete-btn {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, color 0.2s ease;
+    opacity: 0;
+}
+
+.note-card:hover .delete-btn {
+    opacity: 1;
+}
+
+.delete-btn:hover {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+}
+
+.note-card.pinned .pin-badge {
+    right: 3rem;
+}
+
+.note-card.pinned .delete-btn {
+    opacity: 1;
+}
+
 .note-card-title {
     font-size: 1.25rem;
     font-weight: 600;
